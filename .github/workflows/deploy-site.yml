@@ -10,6 +10,7 @@ on:
 
 jobs:
   build_deploy:
+    runs-on: ubuntu-20.04
     steps:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
