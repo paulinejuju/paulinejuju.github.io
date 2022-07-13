@@ -1,0 +1,392 @@
+{{ $ := .root }}
+{{ $page := .page }}
+{{ $columns := $page.Params.design.columns | default "2" }}
+
+<!-- Experience widget -->
+
+<div class="col">
+    <div style="height: calc(0.9 * calc(100vh - 70px)); border-radius:50px; width: 100%;">
+        <div id='mapContainer1' style='width: 100%; height: 100%; border-radius:50px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)'></div>
+    </div>
+</div>
+</div>
+
+<div class="row pt-4">
+    <div class="section-heading col-12 col-lg-4 mb-3 mb-lg-0 d-flex flex-column align-items-center align-items-lg-start">
+        <h1 class="mb-0">
+            Industrial
+        </h1>
+    </div>
+
+<div class="col-12 {{if eq $columns "2"}}col-lg-8{{end}}">
+  {{ with $page.Content }}{{ . }}{{ end }}
+
+  {{ if $page.Params.experience }}
+  {{ $exp_len := len $page.Params.experience }}
+
+  {{/* Default to user's custom order (as requested in #1761) as Hugo doesn't support multiple sorts on params. */}}
+  {{ range $idx, $key := $page.Params.experience }}
+  <div class="row experience">
+    <!-- Timeline -->
+    <div class="col-auto text-center flex-column d-none d-sm-flex">
+      <div class="row h-50">
+        <div class="col {{if gt $idx 0}}border-right{{end}}">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="m-2">
+        <span class="badge badge-pill border {{if not .date_end}}exp-fill{{end}}">&nbsp;</span>
+      </div>
+      <div class="row h-50">
+        <div class="col {{if lt $idx (sub $exp_len 1)}}border-right{{end}}">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+    </div>
+    <!-- Content -->
+    <div class="col py-2">
+      <div class="card">
+        <div class="card-body">
+
+          {{- if .company_logo}}
+          {{- $svg_icon := resources.Get (printf "media/icons/brands/%s.svg" .company_logo) -}}
+          {{ if not $svg_icon }}{{ errorf "Brand logo not found at `assets/media/icons/brands/%s.svg`" .company_logo }}{{end}}
+          <div class="d-flex align-content-start">
+            <div class="mr-2 mb-2">
+              {{- with .company_url}}<a href="{{.}}" target="_blank" rel="noopener">{{end -}}
+              <img src="{{ $svg_icon.RelPermalink }}" width="56px" height="56px" alt="{{.company | plainify}}" loading="lazy">
+              {{- with .company_url}}</a>{{end -}}
+            </div>
+            <div>
+          {{ end }}
+
+              <div class="section-subheading card-title exp-title text-muted my-0">{{.title | markdownify | emojify}}</div>
+              <div class="section-subheading card-title exp-company text-muted my-0">
+                {{- with .company_url}}<a href="{{.}}" target="_blank" rel="noopener">{{end}}{{.company | markdownify | emojify}}{{with .company_url}}</a>{{end -}}
+              </div>
+              <div class="text-muted exp-meta">
+                {{ (time .date_start) | time.Format ($page.Params.date_format | default "January 2006") }} –
+                {{ if .date_end}}
+                  {{ (time .date_end) | time.Format ($page.Params.date_format | default "January 2006") }}
+                {{else}}
+                  {{ i18n "present" | default "Present" }}
+                {{end}}
+                {{with .location}}
+                  <span class="middot-divider"></span>
+                  <span>{{.}}</span>
+                {{end}}
+              </div>
+
+          {{- if .company_logo}}
+            </div>
+          </div>
+          {{end}}
+
+          {{with .description}}<div class="card-text">{{. | markdownify | emojify}}</div>{{end}}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{end}}
+  {{end}}
+</div>
+</div>
+
+<!-- Experience widget -->
+<div class="row">
+    <div class="section-heading col-12 col-lg-4 mb-3 mb-lg-0 d-flex flex-column align-items-center align-items-lg-start">
+        <h1 class="mb-0">
+            Humanitarian Missions
+        </h1>
+    </div>
+<div class="col-12 {{if eq $columns "2"}}col-lg-8{{end}}">
+
+    {{ if $page.Params.mission }}
+    {{ $exp_len := len $page.Params.mission }}
+
+    {{/* Default to user's custom order (as requested in #1761) as Hugo doesn't support multiple sorts on params. */}}
+    {{ range $idx, $key := $page.Params.mission }}
+    <div class="row experience">
+      <!-- Timeline -->
+      <div class="col-auto text-center flex-column d-none d-sm-flex">
+        <div class="row h-50">
+          <div class="col {{if gt $idx 0}}border-right{{end}}">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+        </div>
+        <div class="m-2">
+          <span class="badge badge-pill border {{if not .date_end}}exp-fill{{end}}">&nbsp;</span>
+        </div>
+        <div class="row h-50">
+          <div class="col {{if lt $idx (sub $exp_len 1)}}border-right{{end}}">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+        </div>
+      </div>
+      <!-- Content -->
+      <div class="col py-2">
+        <div class="card">
+          <div class="card-body">
+
+            {{- if .company_logo}}
+            {{- $svg_icon := resources.Get (printf "media/icons/brands/%s.svg" .company_logo) -}}
+            {{ if not $svg_icon }}{{ errorf "Brand logo not found at `assets/media/icons/brands/%s.svg`" .company_logo }}{{end}}
+            <div class="d-flex align-content-start">
+              <div class="mr-2 mb-2">
+                {{- with .company_url}}<a href="{{.}}" target="_blank" rel="noopener">{{end -}}
+                <img src="{{ $svg_icon.RelPermalink }}" width="56px" height="56px" alt="{{.company | plainify}}" loading="lazy">
+                {{- with .company_url}}</a>{{end -}}
+              </div>
+              <div>
+            {{ end }}
+
+                <div class="section-subheading card-title exp-title text-muted my-0">{{.title | markdownify | emojify}}</div>
+                <div class="section-subheading card-title exp-company text-muted my-0">
+                  {{- with .company_url}}<a href="{{.}}" target="_blank" rel="noopener">{{end}}{{.company | markdownify | emojify}}{{with .company_url}}</a>{{end -}}
+                </div>
+                <div class="text-muted exp-meta">
+                  {{ (time .date_start) | time.Format ($page.Params.date_format | default "January 2006") }} –
+                  {{ if .date_end}}
+                    {{ (time .date_end) | time.Format ($page.Params.date_format | default "January 2006") }}
+                  {{else}}
+                    {{ i18n "present" | default "Present" }}
+                  {{end}}
+                  {{with .location}}
+                    <span class="middot-divider"></span>
+                    <span>{{.}}</span>
+                  {{end}}
+                </div>
+
+            {{- if .company_logo}}
+              </div>
+            </div>
+            {{end}}
+
+            {{with .description}}<div class="card-text">{{. | markdownify | emojify}}</div>{{end}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{end}}
+    {{end}}
+  </div>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+    #map {
+        height: calc(100vh - 70px)
+    }
+
+    <!-- #marker {
+    background-image: url('https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    } -->
+
+    .mapboxgl-popup {
+    max-width: 250px;
+    color: black;
+    }
+</style>
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1Ijoid2VzbGV5YmFuZmllbGQiLCJhIjoiY2pmMDRwb202MGlzNDJ3bm44cHA3YXZiNCJ9.b2yOf2vbWnWiV7mlsFAywg';
+    const map = new mapboxgl.Map({
+    container: 'mapContainer1',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [0, 0],
+    zoom: 1.1
+    });
+
+    map.on('load', () => {
+    map.addSource('places', {
+        'type': 'geojson',
+        'data': {
+            'type': 'FeatureCollection',
+            'features': [
+            {{ range $idx, $key := $page.Params.experience }}
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                            '<div class="exp-title text-muted my-0">{{.title | markdownify | emojify}}</div>' +
+                            '<div class="exp-company text-muted my-0">' +
+                                '{{.company | markdownify | emojify}}' +
+                              '</div>' +
+                              '<div class="text-muted exp-company">' +
+                                '{{ (time .date_start) | time.Format ($page.Params.date_format | default "January 2006") }} – ' +
+                                '{{ if .date_end}}' +
+                                  '{{ (time .date_end) | time.Format ($page.Params.date_format | default "January 2006") }}' +
+                                '{{else}}' +
+                                  '{{ i18n "present" | default "Present" }}' +
+                                '{{end}}' +
+                                '{{with .location}}' +
+                                  '<span class="middot-divider"></span>' +
+                                  '<span>{{.}}</span>' +
+                                '{{end}}' +
+                              '</div>' +
+                            '<p>{{.description | markdownify | emojify}}</p>'
+                        },
+                        'geometry': {
+                        'type': 'Point',
+                        'coordinates': [ {{.longitude}}, {{.lat}} ]
+                        }
+                    },
+            {{end}}
+            ]
+        }
+    });
+
+    map.addSource('missions', {
+        'type': 'geojson',
+        'data': {
+            'type': 'FeatureCollection',
+            'features': [
+            {{ range $idx, $key := $page.Params.mission }}
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                            '<div class="exp-title text-muted my-0">{{.title | markdownify | emojify}}</div>' +
+                            '<div class="exp-company text-muted my-0">' +
+                                '{{.company | markdownify | emojify}}' +
+                              '</div>' +
+                              '<div class="text-muted exp-company">' +
+                                '{{ (time .date_start) | time.Format ($page.Params.date_format | default "January 2006") }} – ' +
+                                '{{ if .date_end}}' +
+                                  '{{ (time .date_end) | time.Format ($page.Params.date_format | default "January 2006") }}' +
+                                '{{else}}' +
+                                  '{{ i18n "present" | default "Present" }}' +
+                                '{{end}}' +
+                                '{{with .location}}' +
+                                  '<span class="middot-divider"></span>' +
+                                  '<span>{{.}}</span>' +
+                                '{{end}}' +
+                              '</div>' +
+                            '<p>{{.description | markdownify | emojify}}</p>'
+                        },
+                        'geometry': {
+                        'type': 'Point',
+                        'coordinates': [ {{.longitude}}, {{.lat}} ]
+                        }
+                    },
+            {{end}}
+            ]
+        }
+    });
+
+    let coordinates = []
+    {{ range $idx, $key := $page.Params.experience }}
+    coordinates.push([ {{.longitude}}, {{.lat}} ])
+    {{end}}
+
+    map.addSource('route', {
+        'type': 'geojson',
+        'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+        'type': 'LineString',
+        'coordinates': coordinates
+        }
+        }
+        })
+    // Add a layer showing the places.
+
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+        'line-join': 'round',
+        'line-cap': 'round'
+        },
+        'paint': {
+        'line-color': '#888',
+        'line-width': 2,
+        'line-dasharray': [1, 3],
+        }
+        });
+
+    map.addLayer({
+        'id': 'places',
+        'type': 'circle',
+        'source': 'places',
+        'paint': {
+        'circle-color': '#4264fb',
+        'circle-radius': 6,
+        'circle-stroke-width': 2,
+        'circle-stroke-color': '#ffffff'
+        }
+        });
+
+        map.addLayer({
+            'id': 'missions',
+            'type': 'circle',
+            'source': 'missions',
+            'paint': {
+            'circle-color': '#fb4242',
+            'circle-radius': 6,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#ffffff'
+            }
+            });
+
+    // Create a popup, but don't add it to the map yet.
+    const popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+    });
+
+    map.on('mouseenter', 'places', (e) => {
+    // Change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = 'pointer';
+
+    // Copy coordinates array.
+    const coordinates = e.features[0].geometry.coordinates.slice();
+    const description = e.features[0].properties.description;
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'places', () => {
+    map.getCanvas().style.cursor = '';
+    popup.remove();
+    });
+
+    map.on('mouseenter', 'missions', (e) => {
+    // Change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = 'pointer';
+
+    // Copy coordinates array.
+    const coordinates = e.features[0].geometry.coordinates.slice();
+    const description = e.features[0].properties.description;
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'missions', () => {
+    map.getCanvas().style.cursor = '';
+    popup.remove();
+    });
+    });
+</script>

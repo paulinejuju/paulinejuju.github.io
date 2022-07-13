@@ -7,7 +7,7 @@ widget: experience
 headless: true
 
 # Order that this section appears on the page.
-weight: 40
+weight: 20
 
 title: Experience
 subtitle:
@@ -22,29 +22,77 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
-  - title: CEO
-    company: GenCoin
-    company_url: ''
-    company_logo: org-gc
-    location: California
-    date_start: '2021-01-01'
-    date_end: ''
+  - title: Hydrogeologist
+    company: Groundwater Relief
+    company_url: "http://groundwater-relief.org/"
+    company_logo: groundwater-relief
+    location: Totnes England
+    longitude: -3.689371
+    lat: 50.453953
+    date_start: "2021-01-01"
+    date_end: ""
     description: |2-
         Responsibilities include:
-        
+
         * Analysing
         * Modelling
         * Deploying
 
-  - title: Professor of Semiconductor Physics
-    company: University X
-    company_url: ''
+  - title: Hydrogeologist
+    company: Ramboll
+    company_url: ""
     company_logo: org-x
-    location: California
-    date_start: '2016-01-01'
-    date_end: '2020-12-31'
+    location: Aix-en-Provence, France
+    longitude: 5.357472
+    lat: 43.488537
+    date_start: "2016-01-01"
+    date_end: "2020-12-31"
     description: Taught electronic engineering and researched semiconductor physics.
 
+  - title: Hydrogeologist
+    company: GHD
+    company_url: ""
+    company_logo: org-x
+    location: Christchurch, New Zealand
+    longitude: 172.628801
+    lat: -43.521776
+    date_start: "2016-01-01"
+    date_end: "2020-12-31"
+    description: Taught electronic engineering and researched semiconductor physics.
+
+mission:
+  - title: Hydrogeologist
+    company: Groundwater Relief
+    company_url: "http://groundwater-relief.org/"
+    company_logo: groundwater-relief
+    location: Bambari CAR
+    longitude: 20.66824
+    lat: 5.764905
+    date_start: "2021-01-01"
+    date_end: ""
+    description: |2-
+        Responsibilities include:
+
+        * Analysing
+        * Modelling
+        * Deploying
+
+  - title: Hydrogeologist
+    company: GHD
+    company_url: "http://groundwater-relief.org/"
+    company_logo: groundwater-relief
+    location: Cook Islands
+    longitude: 159.7777
+    lat: -21.2367
+    date_start: "2021-01-01"
+    date_end: ""
+    description: |2-
+        Responsibilities include:
+
+        * Analysing
+        * Modelling
+        * Deploying
+
 design:
-  columns: '2'
+  columns: "2"
 ---
